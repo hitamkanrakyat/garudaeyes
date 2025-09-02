@@ -128,12 +128,4 @@ Jika Anda ingin deploy ke LAMPP/XAMPP (bukan instalasi paket sistem), ada skrip 
 
 10) Jika butuh bantuan
 
-Jika ingin saya:
-- generate password admin / DB yang kuat untuk Anda, atau
-- menyesuaikan skrip agar DB password ditentukan via flag `--db-pass`, atau
-- membuat varian untuk CentOS/AlmaLinux,
-
-...kirim permintaan dan saya akan update skrip.
-
----
 README ini dibuat untuk memberi panduan cepat dan aman bagi pemula agar dapat menjalankan skrip provisioning satu-kali dan meng-deploy aplikasi Garuda Eyes.
