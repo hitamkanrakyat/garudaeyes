@@ -1,0 +1,1 @@
+sekarang kan source saya sudah menjadi nah saya punya vps polos dan benar benar polosan yang sudah terkonek ke domain, saya minta anda buatkan shell script1 kali yang langsung menjalankan source code saya lengkap mulai dari update dan upgrade ser

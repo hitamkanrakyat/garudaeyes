@@ -1,0 +1,38 @@
+-- db/init.sql
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(191) NOT NULL UNIQUE,
+  email VARCHAR(191) DEFAULT NULL,
+  password VARCHAR(255) NOT NULL,
+  current_session VARCHAR(128) DEFAULT NULL,
+  locked_until DATETIME DEFAULT NULL,
+  fullname VARCHAR(191) DEFAULT NULL,
+  role VARCHAR(50) NOT NULL DEFAULT 'user',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- password reset tokens
+CREATE TABLE IF NOT EXISTS password_reset_tokens (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INT UNSIGNED NOT NULL,
+  token VARCHAR(128) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  used TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- login attempts for rate limiting and auditing
+CREATE TABLE IF NOT EXISTS login_attempts (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INT UNSIGNED NULL,
+  username VARCHAR(191) DEFAULT NULL,
+  ip VARCHAR(45) DEFAULT NULL,
+  success TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  INDEX (username),
+  INDEX (ip),
+  INDEX (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

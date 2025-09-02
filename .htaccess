@@ -1,0 +1,30 @@
+RewriteEngine On
+# Disable MultiViews to avoid filename-based internal redirects (e.g. /login -> login.php)
+Options -MultiViews
+
+# Don't rewrite existing files or directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# All other requests go to index.php (front controller)
+RewriteRule ^ index.php [L,QSA]
+
+# Canonicalize legacy .php/.html URLs to extensionless routes
+RewriteCond %{THE_REQUEST} \s/([^.\s]+)\.(php|html) [NC]
+RewriteRule ^ /%1 [R=301,L]
+RewriteEngine On
+# Disable MultiViews to avoid filename-based internal redirects (e.g. /login -> login.php)
+Options -MultiViews
+
+# Jangan rewrite bila file/direktori nyata
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Semua request lain diteruskan ke index.php (front controller)
+RewriteRule ^ index.php [L,QSA]
+
+# Canonicalize legacy .php/.html URLs to extensionless routes
+RewriteCond %{THE_REQUEST} \s/([^.\s]+)\.(php|html) [NC]
+RewriteRule ^ /%1 [R=301,L]
